@@ -1,0 +1,12 @@
+[package]
+name = "pro_nav"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tonic = "0.12" # gRPC implementation for Rust
+prost = "0.13" # protobuf implementation for Rust
+tokio = {version = "1.0", features = ["full"]} # popular async runtime for Rust
+
+[build-dependencies]
+tonic-build = "0.12" # need to add a build.rs file

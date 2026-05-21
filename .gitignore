@@ -1,0 +1,4 @@
+pro_nav/target/
+
+# Ignore the "sim_output" directory
+sim_output/

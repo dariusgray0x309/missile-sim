@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package simulation;
+
+message Vector3d{
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}
+
+message Attitude{
+    double roll  = 1;
+    double pitch = 2;
+    double yaw   = 3;
+}
+
+message Kinematics{
+    Vector3d pos = 1;
+    Vector3d vel = 2;
+    Vector3d acc = 3;
+    Attitude att = 4;
+}
+
+message Uncertainty{
+    Vector3d posStddev = 1;
+    Vector3d velStddev = 2;
+    Vector3d accStddev = 3;
+    Attitude attStddev = 4;
+}
+
+message Pursuer{
+    Kinematics states       = 1;
+    double navGain          = 2;
+    Uncertainty uncertainty = 3;
+}
+
+message Target{
+    Kinematics states = 1;
+    double flightPath = 2;
+}
+
+message EngagementSetupRequest{
+    string message = 1;
+}
+
+message EngagementSetupResponse{
+    Pursuer pursuer = 1;
+    Target target   = 2;
+    bool success    = 3;
+}
+
+service Parameters{
+    rpc GetConfiguration(EngagementSetupRequest) returns (EngagementSetupResponse);
+}
